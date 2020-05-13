@@ -1,35 +1,88 @@
+autoUpdate:
+  enabled: false
+  schedule: ""
+bootConfigURL: https://github.com/jenkins-x/jenkins-x-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  environmentGitPublic: false
-  project: ""
+  clusterName: bootv21
+  devEnvApprovers:
+  - jstrachan
+  environmentGitOwner: cb-kubecd
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  namespace: jx
+  project: jstrachan-multicluster
   provider: gke
-  zone: ""
-gitops: true
+  registry: gcr.io
+  vaultName: bootv21
+  vaultSAName: bootv21-vt
+  zone: europe-west1-d
 environments:
-- key: dev
-- key: staging
-- key: production
+- ingress:
+    domain: 146.148.5.128.nip.io
+    externalDNS: false
+    namespaceSubDomain: -jx.
+    tls:
+      email: ""
+      enabled: false
+      production: true
+  key: dev
+  repository: environment-bootv21-dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+  repository: environment-bootv21-staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+  repository: environment-bootv21-production
+gitops: true
 ingress:
-  domain: ""
+  domain: 146.148.5.128.nip.io
   externalDNS: false
+  namespaceSubDomain: -jx.
   tls:
     email: ""
     enabled: false
-    production: false
+    production: true
 kaniko: true
-secretStorage: local
+repository: nexus
+secretStorage: vault
 storage:
+  backup:
+    enabled: true
+    url: gs://backup-bootv21-f309d384011d
   logs:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://logs-bootv21-f309d384011d
   reports:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://reports-bootv21-f309d384011d
   repository:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://repository-bootv21-f309d384011d
+vault:
+  bucket: vault-bootv21-f309d384011d
+  key: crypto-key-bootv21-f309d384011d
+  keyring: keyring-bootv21-f309d384011d
+  name: bootv21
+  serviceAccount: bootv21-vt
+velero:
+  schedule: ""
+  ttl: ""
 versionStream:
-  ref: "master"
+  ref: v1.0.456
   url: https://github.com/jenkins-x/jenkins-x-versions.git
 webhook: lighthouse

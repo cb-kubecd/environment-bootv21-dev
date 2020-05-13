@@ -1,0 +1,10 @@
+adminUser:
+  password: vault:bootv21/adminUser:password
+  username: admin
+enableDocker: false
+pipelineUser:
+  email: jenkins-x@googlegroups.com
+  token: vault:bootv21/pipelineUser:token
+  username: jenkins-x-labs-bot
+prow:
+  hmacToken: vault:bootv21/prow:hmacToken
