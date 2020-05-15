@@ -23,4 +23,4 @@ dependencies:
   version: 0.0.15
 - name: jx-operator
   repository: https://storage.googleapis.com/jenkinsxio-labs-private/charts
-  version: 0.0.16
+  version: 0.0.18
